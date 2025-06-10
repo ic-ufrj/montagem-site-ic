@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  nginx:
+    build: ./nginx
+    ports:
+      - "8064:80"
+    volumes:
+      - site-data:/var/www/html:ro
+    restart: unless-stopped
+
+  ssh:
+    build: ./ssh
+    ports:
+      - "2264:22"
+    volumes:
+      - site-data:/srv/site
+    restart: unless-stopped
+
+volumes:
+  site-data:
+
