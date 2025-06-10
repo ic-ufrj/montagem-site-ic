@@ -3,7 +3,7 @@ FROM ubuntu:22.04
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update \
-  && apt-get install -y openssh-server \
+  && apt-get install -y openssh-server rsync \
   && mkdir /var/run/sshd
 
 RUN useradd -m -s /bin/bash deployer \
