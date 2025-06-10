@@ -1,21 +1,26 @@
-FROM alpine
+FROM ubuntu:22.04
 
-RUN apk add --no-cache openssh rsync \
-  && adduser -D deployer \
-  && mkdir -p /home/deployer/.ssh /srv/site \
-  && chown -R deployer:deployer /srv/site /home/deployer
+ENV DEBIAN_FRONTEND=noninteractive
 
-COPY authorized_keys /home/deployer/.ssh/authorized_keys
+RUN apt-get update \
+  && apt-get install -y openssh-server \
+  && mkdir /var/run/sshd
 
-RUN chmod 600 /home/deployer/.ssh/authorized_keys \
+RUN useradd -m -s /bin/bash deployer \
+  && mkdir /home/deployer/.ssh \
+  && mkdir /home/deployer/site
+
+COPY id_ed25519.pub /home/deployer/.ssh/authorized_keys
+
+RUN chown -R deployer:deployer /home/deployer/.ssh /home/deployer/site \
   && chmod 700 /home/deployer/.ssh \
-  && chown -R deployer:deployer /home/deployer/.ssh \
-  && ssh-keygen -A
+  && chmod 600 /home/deployer/.ssh/authorized_keys
 
-RUN echo "PasswordAuthentication no" >> /etc/ssh/sshd_config \
-  && echo "PermitRootLogin no" >> /etc/ssh/sshd_config \
-  && echo "PubkeyAuthentication yes" >> /etc/ssh/sshd_config
+RUN sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config \
+  && sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin no/' /etc/ssh/sshd_config \
+  && echo 'AllowUsers deployer' >> /etc/ssh/sshd_config
 
 EXPOSE 22
+
 CMD ["/usr/sbin/sshd", "-D"]
 

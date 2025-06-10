@@ -14,7 +14,7 @@ services:
     ports:
       - "2264:22"
     volumes:
-      - site-data:/srv/site
+      - site-data:/home/deployer/site
     restart: unless-stopped
 
 volumes:
