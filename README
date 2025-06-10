@@ -1,0 +1,18 @@
+INSTRUÇÕES DE MONTAGEM DO SITE DO IC
+
+REQUISITOS: Docker e Docker Compose instalados
+
+PASSO 1: Clonar o repositório e entrar nele
+
+    git clone https://github.com/ic-ufrj/montagem-site-ic.git
+    cd montagem-site-ic
+
+PASSO 2: Copiar chave pública
+
+    cp /caminho/para/chave/publica ssh/id_ed25519.pub
+
+PASSO 3: Rodar com docker compose
+
+    docker compose up
+
+
