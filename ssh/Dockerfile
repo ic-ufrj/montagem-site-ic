@@ -10,8 +10,6 @@ RUN useradd -m -s /bin/bash deployer \
   && mkdir /home/deployer/.ssh \
   && mkdir /home/deployer/site
 
-COPY id_ed25519.pub /home/deployer/.ssh/authorized_keys
-
 RUN chown -R deployer:deployer /home/deployer/.ssh /home/deployer/site \
   && chmod 700 /home/deployer/.ssh \
   && chmod 600 /home/deployer/.ssh/authorized_keys
