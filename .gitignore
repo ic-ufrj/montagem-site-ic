@@ -1,5 +1,6 @@
 ssh/id_ed25519.pub
-nginx/certbot/*
 site-data
 certbot
-
+nginx/nginx.conf
+chaveic
+chaveic.pub
