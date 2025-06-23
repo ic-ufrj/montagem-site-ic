@@ -34,7 +34,6 @@ services:
       - "2264:22"
     volumes:
       - site-data:/home/deployer/site
-      - ./ssh/id_ed25519.pub:/home/deployer/.ssh/authorized_keys
     restart: unless-stopped
 
 volumes:
