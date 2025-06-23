@@ -35,5 +35,5 @@ services:
     restart: unless-stopped
 
 volumes:
-  site-data
+  site-data:
 
