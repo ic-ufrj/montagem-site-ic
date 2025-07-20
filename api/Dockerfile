@@ -10,6 +10,8 @@ RUN cargo build --release
 
 FROM debian:bookworm-slim
 
+RUN apt-get update && apt-get install -y libssl3
+
 RUN mkdir -p /root/.config/alumnic
 
 COPY config.yaml /root/.config/alumnic/config.yaml
