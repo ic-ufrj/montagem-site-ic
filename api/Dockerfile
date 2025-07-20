@@ -8,7 +8,11 @@ WORKDIR /build/alumnic
 
 RUN cargo build --release
 
-FROM debian:buster-slim
+FROM debian:bookworm-slim
+
+RUN mkdir -p /root/.config/alumnic
+
+COPY config.yaml /root/.config/alumnic/config.yaml
 
 COPY --from=builder /build/alumnic/target/release/alumnic /usr/local/bin/alumnic
 
