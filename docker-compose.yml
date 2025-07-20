@@ -16,6 +16,7 @@ services:
       - certbot
       - ssh
       - php
+      - api
 
   certbot:
     image: certbot/certbot
@@ -44,6 +45,10 @@ services:
       - pag-professores:/var/www/profs
     extra_hosts:
       - "host.docker.internal:host-gateway"
+
+  api:
+    build: ./api
+
 
 volumes:
   site-data:
