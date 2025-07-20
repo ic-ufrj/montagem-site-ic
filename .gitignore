@@ -2,3 +2,4 @@ ssh/id_ed25519.pub
 certbot
 chaveic
 chaveic.pub
+api/config.yaml
